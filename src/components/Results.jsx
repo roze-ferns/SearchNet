@@ -20,27 +20,32 @@ export const Results = () => {
   switch (location.pathname) {
     case '/search':
       return (
-        // <div className="sm:px-6 md:px-10 lg:px-16 xl:px-20">
-        //     {results?.results?.map(({ url, title, description }, index) => (
-        //         <div key={index} className="w-full mb-8">
-        //         <a href={url} target="_blank" rel="noreferrer">
-        //             <p className="text-sm">{url.length > 30 ? url.substring(0, 30) : url}</p>
-        //             <p className="text-lg hover:underline dark:text-blue-300 text-blue-700">{title}</p>
-        //         </a>
-        //         <p className="text-gray-450">{description}</p>
-        //         </div>
-        //     ))}
-        // </div>
-        <div className="sm:px-56 flex flex-wrap justify-between space-y-6">
-          {results?.results?.map(({ url, title }, index) => (
-            <div key={index} className="md:w-2/5 w-full">
-              <a href={url} target="_blank" rel="noreferrer">
-                <p className="text-sm">{url.length > 30 ? url.substring(0, 30) : url}</p>
-                <p className="text-lg hover:underline dark:text-blue-300 text-blue-700  ">{title}</p>
-              </a>
+        <div className="sm:px-6 md:px-10 lg:px-16 xl:px-20">
+          {searchTerm === '' ? (
+            
+            <div className="flex flex-col items-center justify-center h-full">
+              <p className="text-lg text-gray-500 mb-4 dark:text-gray-300">Welcome to SearchNet!</p>
+              <p className="text-gray-400 mb-8 dark:text-gray-600">Search the web with ease and speed.</p>
+              <img
+                  src="/images/searching.jpg"  // Use the relative path to the image
+  alt="SearchNet Logo"
+  className="w-full max-w-md h-auto mx-auto"
+              />
             </div>
-          ))}
+             
+          ) : (
+            results?.results?.map(({ url, title, description }, index) => (
+              <div key={index} className="w-full mb-8">
+                <a href={url} target="_blank" rel="noreferrer">
+                  <p className="text-sm">{url.length > 30 ? url.substring(0, 30) : url}</p>
+                  <p className="text-lg hover:underline dark:text-blue-300 text-blue-700">{title}</p>
+                </a>
+                <p className="text-gray-450">{description}</p>
+              </div>
+            ))
+          )}
         </div>
+        
       );
     default:
       return 'API Usage Limit Exceeded';
